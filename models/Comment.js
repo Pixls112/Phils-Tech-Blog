@@ -27,7 +27,7 @@ Comment.init(
           key: 'id'
         }
       },
-      content_text: {
+      contentText: {
         type: DataTypes.STRING,
       }
   },
