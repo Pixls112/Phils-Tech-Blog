@@ -18,7 +18,7 @@ Post.init(
     contentText: {
       type: DataTypes.STRING,
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
