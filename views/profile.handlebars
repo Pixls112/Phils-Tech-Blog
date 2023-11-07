@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
+    <h4>Click on your posts to edit</h4>
+  </div>
+  <div class="col-auto">
+    <button id="create" class="btn">New Post</button>
+  </div>
+</div>
+
+<div class="container container-fluid mt-5">
+  {{#if posts.length}}
+  {{#each posts as |post|}}
+  <div class="card">
+    <a href="/post/{{post.id}}">
+      <h3 class="card-header">
+        <div class="row">
+          <div class="col-auto">
+            {{post.title}}
+          </div>
+          <div class="col-auto">
+            Created on {{format_date post.date_created}}
+          </div>
+        </div>
+      </h3>
+    </a>
+  </div>
+  {{/each}}
+  {{/if}}
+</div>
+
+<script src="/js/profile.js"></script>
