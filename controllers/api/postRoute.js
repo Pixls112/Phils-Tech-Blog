@@ -15,6 +15,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// Sets a a put route which will update a post with that specific ID
 router.put('/:id', async (req, res) => {
   try {
     const update = await Post.update(
@@ -33,6 +34,7 @@ router.put('/:id', async (req, res) => {
     };
 });
 
+//  This sets up a delete path which when called on would destroy/delete a created post with that ID
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({

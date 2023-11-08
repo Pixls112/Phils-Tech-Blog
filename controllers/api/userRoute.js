@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Sets up a login route to post the user when the name and password match an existing name and password from the database
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { name: req.body.name } });
@@ -48,6 +49,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
+
+// Sets up a post route for when the user logs out which will destroy the session and send the users back to the landing page
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

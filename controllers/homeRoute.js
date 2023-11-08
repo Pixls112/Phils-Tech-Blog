@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//This sets up a get route which will pull a post with the specific ID attach to it and the response will also contain the name associated with the post.
 router.get('/post/:id', async (req, res) => {
   try {
     const pData = await Post.findByPk(req.params.id, {
@@ -49,6 +50,8 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+
+// This sets up a get route which will pull a post and then a comment with the ID associated with it.
 router.get('/post/comments/:id', async (req, res) => {
   try {
     const commentData = await Comment.findAll({
@@ -59,7 +62,7 @@ router.get('/post/comments/:id', async (req, res) => {
     });
 
     const comments = commentData.map((comment) => comment.get({ plain: true }));
-
+    // Same as the get route above.
     const postData = await Post.findByPk(req.params.id, {
       include: [
         {
@@ -110,6 +113,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Sets up a get route for users to signup, so when the route is accessed it will render the signup page.
 router.get('/signUp', async (req, res) => {
   try {
     // Pass serialized data and session flag into template
@@ -119,6 +123,7 @@ router.get('/signUp', async (req, res) => {
   }
 });
 
+// In tandem with the one above, This allows the user to create a name and password which the route will give a unique ID to and add to the database.
 router.post('/signUp', async (req, res) => {
   try {
     const userData = await User.create(req.body);

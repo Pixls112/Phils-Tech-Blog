@@ -12,6 +12,7 @@ const loginFormHandler = async (event) => {
       });
 
       if (response.ok) {
+        // reloads page to profile page when successfully logged in
         document.location.replace('/profile');
       } else {
         alert("Login failed wrong username or passowrd");
