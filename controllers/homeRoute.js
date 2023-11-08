@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all post and JOIN with user data
     const pData = await Post.findAll({
       include: [
         {
@@ -40,8 +40,39 @@ router.get('/post/:id', async (req, res) => {
 
     const post = pData.get({ plain: true });
 
-    res.render('project', {
+    res.render('modifyPost', {
       ...post,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/post/comments/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+      where: {
+        post_id: req.params.id
+      },
+      include: [{ all: true, nested: true }]
+    });
+
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        }
+      ],
+    });
+    const post = postData.get({ plain: true });
+
+    res.render('comment', {
+      post,
+      comments,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -101,6 +132,16 @@ router.post('/signUp', async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+router.get('/createPost', async (req, res) => {
+  try {
+    res.render('addPost', {
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

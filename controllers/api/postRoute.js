@@ -17,7 +17,7 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const dish = await Post.update(
+    const update = await Post.update(
     {
       title: req.body.title,
       content: req.body.content,
@@ -27,7 +27,7 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    res.status(200).json(dish);
+    res.status(200).json(update);
   } catch (err) {
       res.status(500).json(err);
     };
