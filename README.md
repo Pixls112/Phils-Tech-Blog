@@ -1,4 +1,4 @@
-# Text Editor Starter Code
+# Tech-Blog MVC
 
  ## Table of Contents
  - [Description](#description)
