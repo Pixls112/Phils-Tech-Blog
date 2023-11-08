@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// Sets up a post route that creates a new User and inputs it into the database which then sends a response back to the user.
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -16,7 +17,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Sets up a login route to post the user when the name and password match an existing name and password from the database
+// Sets up a post route for user to login by matching there inputted data and matching it with the data in the database.
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { name: req.body.name } });
@@ -27,7 +28,7 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
-
+    // This is used to validate the password to ensure that the correct string matches.
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {

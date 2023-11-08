@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Sets up a post route to create a new post in the database and sends the response back.
 router.post('/', withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
@@ -15,7 +16,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// Sets a a put route which will update a post with that specific ID
+// Sets up a put route that updates a post with the specific ID from the database
 router.put('/:id', async (req, res) => {
   try {
     const update = await Post.update(
@@ -34,7 +35,7 @@ router.put('/:id', async (req, res) => {
     };
 });
 
-//  This sets up a delete path which when called on would destroy/delete a created post with that ID
+//  This sets up a delete route that deletes a post with a specific ID from the database.
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({

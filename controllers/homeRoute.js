@@ -140,6 +140,7 @@ router.post('/signUp', async (req, res) => {
   }
 });
 
+// This get route is used to create a post when logged in and will then render said post to the user
 router.get('/createPost', async (req, res) => {
   try {
     res.render('addPost', {

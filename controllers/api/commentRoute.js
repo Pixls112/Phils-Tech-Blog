@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Sets up a post route which is protected by withAuth. This creates a new comment in the database and sends the new comment back as a response.
 router.post('/', withAuth, async (req, res) => {
   try {
     const newComment = await Comment.create({
@@ -15,4 +16,4 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router; 
